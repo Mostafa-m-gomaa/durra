@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useDebugValue, useEffect, useState } from 'react'
 import { Search ,Heart ,ShoppingBag ,User, MoveRight} from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { getCatgories, getsubCategories } from '@/api/categories';
@@ -7,6 +7,8 @@ import burgerIcon from'../../src/assets/menu.png'
 import ExampleMenu from './Example';
 import replaceImg from '../assets/replaceImg.png'
 import { IconRight } from 'react-day-picker';
+import { set } from 'date-fns';
+
 
 
 const Header = () => {
@@ -25,13 +27,27 @@ const {data : subCats}=useQuery({
 })
 
 const subCatItems = subCats?.data || []
-console.log(catItems)
+const [ordersNum, setOrderNum] = useState(0);
 
+useEffect(() => {
+  const updateOrders = () => {
+    const orders = localStorage.getItem("orders");
+    const ordersArr = JSON.parse(orders) || [];
+    setOrderNum(ordersArr.length);
+  };
+
+  updateOrders(); // أول مرة
+  window.addEventListener("storage-update", updateOrders);
+
+  return () => {
+    window.removeEventListener("storage-update", updateOrders);
+  };
+}, []);
 
 
 
   return (
-    <div className='w-full bg-scndcolor'>
+    <div className='w-full bg-scndcolor fixed top-0 z-50'>
 
 <div className="w-full overflow-x-hidden lg:overflow-visible mx-auto flex justify-between items-center py-4 ">
 
@@ -108,7 +124,7 @@ console.log(catItems)
 <div className="flex gap-2 lg:gap-8 *:gap-1 *:lg:gap-4 *:text-[11px] *:items-center *:lg:text-[15px] pr-[15px] lg:pr-[35px]">
     {/* <div className="flex"> <span><Search /></span> <span>search</span></div> */}
     <div className="flex"> <span><Heart /></span> <span>WishList</span></div>
-    <div className="flex"> <span><ShoppingBag/></span> <span>Cart</span></div>
+    <Link to="/cart" className="flex"> <span className='relative'><ShoppingBag/> <div className="absolute bg-red-600 px-1 rounded-md top-[-15px] left-[-10px]">{ordersNum}</div></span> <span>Cart</span></Link>
     <div className="flex"> <span><User /></span> <span>Account</span></div>
 </div>
 </div>

@@ -4,6 +4,7 @@ import ShowProducts from '@/components/ShowProducts'
 import UnderHero from '@/components/UnderHero'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
+ 
 
 const Home = () => {
 
@@ -26,7 +27,7 @@ console.log("data" , catItems)
 console.log("subcats" , subCatItems)
 
   return (
-    <div className='flex flex-col gap-16'>
+    <div className='flex flex-col gap-16 w-full pt-16'>
         <Hero />
         <UnderHero />
     {catItems?.map((cat ,i)=>{
@@ -34,7 +35,7 @@ console.log("subcats" , subCatItems)
          <ShowProducts title={cat?.name_en} linkTitle={`see all products`} categoryId={cat?._id} subs={subCatItems} /> 
       )
     })}
-        {/* <ShowProducts title="rgregre" linkTitle="see all regregrewatches" categoryId="2443543546292992" /> */}
+ 
     </div>
   )
 }

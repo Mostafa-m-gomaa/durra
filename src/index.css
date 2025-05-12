@@ -22,7 +22,7 @@ body {
   
   } 
   h3 {
-    @apply text-[25px] capitalize lg:text-2xl font-semibold  ;
+    @apply text-[18px] lg:text-[25px] capitalize lg:text-2xl font-semibold  ;
   
   }
   .container {
