@@ -105,7 +105,7 @@ useEffect(() => {
                                         </div>
                                         <div className="flex  w-[40%] justify-center items-center">
 
-                                        <img src={replaceImg} alt="" className='bg-cardcolor h-[80%]' />
+                                        <img src={cat?.imageCover || replaceImg} alt="" className='bg-cardcolor h-[80%]' />
                                         </div>
                                     </div>
 

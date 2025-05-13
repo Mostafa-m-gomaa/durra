@@ -12,6 +12,8 @@ import { Link } from "react-router-dom"
 import replaceImg from '../assets/replaceImg.png'
 
 export function CarouselSize({subCatItems}) {
+
+
   return (
     <Carousel
       opts={{
@@ -27,7 +29,7 @@ export function CarouselSize({subCatItems}) {
                       <div className="flex">
                         <span className='bg-scndcolor text-[10px]'>NEW</span>
                       </div>
-                      <img src={replaceImg } alt="" className='mx-auto'/>
+                      <img src={sub?.imageCover || replaceImg } alt="" className='mx-auto max-w-[95%] min-w-[90%] max-h-[230px] min-h-[230px]'/>
                       
                         <h3 className="flex flex-wrap text-left">{sub?.name_en}</h3>
                         <span className="text-left text-[11px] flex flex-wrap">{sub?.description_en}</span>

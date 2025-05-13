@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Footer from './components/footer';
 import CatPage from './pages/CatPage';
 import Cart from './pages/Cart';
+import SubCatPage from './pages/SubCat';
 function App() {
   const history = useNavigate()
 
@@ -27,6 +28,7 @@ function App() {
     <Route path="/" element={<Home />} />
     <Route path="/cat/:id" element={<CatPage />} />
     <Route path="/cart" element={<Cart />} />
+    <Route path="/subcategory/:id" element={<SubCatPage />} />
  
   </Routes>
   <Footer />
