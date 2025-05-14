@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import catImage from '../assets/catImg.png'
 import ShowProducts from '@/components/ShowProducts'
 import ShowProductsForSubs from '@/components/showProductFoesubs'
+import GradientCard from '@/components/gradientCard'
 
 const CatPage = () => {
     const {id} =useParams()
@@ -26,7 +27,9 @@ const CatPage = () => {
     const subCatItems = subCategoryData?.data || []
     const productsItems = productsData?.data || []
 
-    console.log("categoryData" , productsItems)
+
+    console.log(subCatItems)
+
   return (
     <div className='w-[90%] mx-auto flex flex-col gap-16 py-32'>
         <div className="flex w-full items-center">
@@ -37,6 +40,11 @@ const CatPage = () => {
 <img src={catItems?.imageCover || catImage} className='mx-auto max-w-[30%] max-h-[400px]' alt="" />
         </div>
 
+
+
+<div className="flex w-full gap-2 justify-center flex-wrap gap-2">
+{subCatItems?.map((sub,i)=> <GradientCard key={i} title={sub?.name_en} image={sub?.imageCover}  link={`/subCat/${sub?._id}`}/>)}
+</div>
 
         <div className="flex gap-32 flex-col w-full ">
 {subCatItems?.map((sub , i) => {

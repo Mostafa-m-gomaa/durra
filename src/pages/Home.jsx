@@ -4,6 +4,8 @@ import ShowProducts from '@/components/ShowProducts'
 import UnderHero from '@/components/UnderHero'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
+import DurraDesign from './DurraDesign'
+import GradientCard from '@/components/gradientCard'
  
 
 const Home = () => {
@@ -23,13 +25,19 @@ const {data : subCats}=useQuery({
 const subCatItems = subCats?.data || []
 
 
-console.log("data" , catItems)
-console.log("subcats" , subCatItems)
+
 
   return (
     <div className='flex flex-col gap-16 w-full pt-16'>
         <Hero />
+
+            {catItems?.map((cat ,i)=>
+              cat?.name_en === "Duraa Designs" &&    <DurraDesign categoryId={cat?._id} title={cat.name_en} subs={subCatItems}   />)}
         <UnderHero />
+        <div className="flex justify-center gap-1 w-[90%] mx-auto">
+
+        {catItems?.map((cat,i)=> ["Duraa Designs" , "Watches" , "Jewelry"].includes(cat?.name_en) && <GradientCard width="max-w-[30%] min-w-[30%]" title={cat?.name_en} image={cat?.imageCover} link={`/cat/${cat._id}`} />)}
+        </div>
     {catItems?.map((cat ,i)=>{
       return(
          <ShowProducts title={cat?.name_en} linkTitle={`see all products`} categoryId={cat?._id} subs={subCatItems} /> 
