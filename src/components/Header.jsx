@@ -15,7 +15,7 @@ import { set } from 'date-fns';
 const Header = () => {
 
     const lang = "en"
-    const [isChecked, setIsChecked] = React.useState(true)
+    const [isChecked, setIsChecked] = React.useState(false)
 
 const {data : categories}=useQuery({
     queryKey:['categories'],
