@@ -1,5 +1,5 @@
 import React from 'react'
-import map from '../assets/Screenshot 2025-05-12 012133.png'
+import map from '../assets/mapa.svg'
 import facebook from '../assets/face.png'
 import youtube from '../assets/Youtube.png'
 import x from '../assets/x.png'
@@ -10,7 +10,7 @@ import durra from '../assets/VectorDuraa.png'
 const Footer = () => {
   return (
     <div className='w-[80%] lg:w-[90%] mx-auto flex flex-col gap-8 py-16'>
-        <img src={map} alt="" className='w-full rou' />
+        <img src={map} alt="" className='w-full ' />
         <div className="flex justify-start    items-center">
             <div className="flex w-[45%] flex-col gap-4">
             <div className='flex flex-col'>

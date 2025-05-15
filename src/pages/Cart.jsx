@@ -111,8 +111,8 @@ setCartItems(JSON.parse(localStorage.getItem("orders")) || [])
     } ,[cartItems])
   return (
     <div className='py-32 w-[90%] mx-auto flex flex-col gap-16' >
-         <div className="flex">
-            <div className="w-[50%] flex flex-col gap-12 items-start">
+         <div className="flex flex-col lg:flex-row">
+            <div className="w-[90%] lg:w-[50%] flex flex-col gap-12 items-start">
 <h2>Contact Information</h2>
 
         <form onSubmit={submitForm}
@@ -215,7 +215,7 @@ setCartItems(JSON.parse(localStorage.getItem("orders")) || [])
 
 </form>
             </div>
-            <div className="w-[50%] flex flex-col gap-4">
+            <div className="w-[90%] lg:w-[50%] flex flex-col gap-4 pt-8 lg:pt-0">
 <h2>shopping cart</h2>
 {cartItems?.map((item , i)=>{
     return(

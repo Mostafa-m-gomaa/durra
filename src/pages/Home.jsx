@@ -6,6 +6,8 @@ import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import DurraDesign from './DurraDesign'
 import GradientCard from '@/components/gradientCard'
+import HomaPartOne from '@/components/HomaPartOne'
+import HomePartTwo from '@/components/HomaPartTwo'
  
 
 const Home = () => {
@@ -34,16 +36,17 @@ const subCatItems = subCats?.data || []
             {catItems?.map((cat ,i)=>
               cat?.name_en === "Duraa Designs" &&    <DurraDesign categoryId={cat?._id} title={cat.name_en} subs={subCatItems}   />)}
         <UnderHero />
-        <div className="flex justify-center gap-1 w-[90%] mx-auto">
+        <div className="flex justify-center gap-1 w-[90%] mx-auto flex-wrap">
 
-        {catItems?.map((cat,i)=> ["Duraa Designs" , "Watches" , "Jewelry"].includes(cat?.name_en) && <GradientCard width="max-w-[30%] min-w-[30%]" title={cat?.name_en} image={cat?.imageCover} link={`/cat/${cat._id}`} />)}
+        {catItems?.map((cat,i)=> ["Duraa Designs" , "Watches" , "Jewelry"].includes(cat?.name_en) && <GradientCard width="max-w-[45%] min-w-[45%] lg:max-w-[30%] lg:min-w-[30%]" title={cat?.name_en} image={cat?.imageCover} link={`/cat/${cat._id}`} />)}
         </div>
     {catItems?.map((cat ,i)=>{
       return(
          <ShowProducts title={cat?.name_en} linkTitle={`see all products`} categoryId={cat?._id} subs={subCatItems} /> 
       )
     })}
- 
+ <HomaPartOne />
+ <HomePartTwo />
     </div>
   )
 }

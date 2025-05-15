@@ -49,7 +49,7 @@ const ProdCard = ({product }) => {
     
                             <h3 className="flex flex-wrap text-left">{product?.title_en}</h3>
                             <span className="text-left text-[11px] flex flex-wrap">{product?.description_en}</span>
-                            <div className="flex justify-between w-full items-center py-2">
+                            <div className="flex justify-between w-full items-start lg:items-center py-2 flex-col lg:flex-row gap-2">
                             <div className="flex flex-wrap text-left">$ {product?.priceAfterDiscount}</div>
                             <Button type="button"  >
                             <Link onClick={()=>{localStorage.setItem("product" , JSON.stringify(product))}} to={`/product/${product?._id}`}>View Product</Link>

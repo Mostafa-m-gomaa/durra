@@ -11,6 +11,7 @@ import CatPage from './pages/CatPage';
 import Cart from './pages/Cart';
 import SubCatPage from './pages/SubCat';
 import ProductPage from './pages/ProductPage';
+import JewelPage from './pages/JeweleryPage';
 function App() {
   const history = useNavigate()
 
@@ -22,7 +23,7 @@ function App() {
   }, [])
 
   return (
-<div className="app">
+<div className="app w-full max-w-[100vw] overflow-x-hidden">
 <Toaster />
 <Header />
   <Routes>
@@ -32,6 +33,7 @@ function App() {
     <Route path="/subcategory/:id" element={<SubCatPage />} />
     <Route path="/subCat/:id" element={<SubCatPage />} />
     <Route path="/product/:id" element={<ProductPage />} />
+    <Route path="/cat/jeweleryCat" element={<JewelPage />} />
  
   </Routes>
   <Footer />

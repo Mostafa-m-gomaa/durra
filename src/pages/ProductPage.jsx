@@ -51,8 +51,8 @@ console.log(JSON.parse(localStorage.getItem("product")))
         };
   return (
     <div className='pt-32 w-[95%] mx-auto'>
-        <div className="flex w-full items-start justify-center gap-8">
-<div className="flex w-[45%] flex-col gap-4">
+        <div className="flex w-full items-start justify-center gap-8 flex-col lg:flex-row">
+<div className="flex w-[95%] lg:w-[45%] flex-col gap-4">
 <img src={selectedImage} alt="" className='transition-all' />
 <div className="flex w-full gap-1 flex-wrap">
     {product?.images?.map((img , i) => {
@@ -67,7 +67,7 @@ return(
 <span className='font-thin text-[12px] '>Traveling Time" is a poetic journey across the globe, tracing time zones and blending continents into a fantastical equestrian world. As latitudes merge and borders dissolve, time becomes fluid, and the compass spins endlessly, symbolizing the freedom to be anywhere, anytime. This imaginative exploration celebrates the boundless possibilities of time and space.</span>
 </div>
 </div>
-<div className="flex w-[30%] flex-col gap-4">
+<div className="flex w-[95%] lg:w-[30%] flex-col gap-4">
 <h2 className="flex flex-wrap text-left">{product?.title_en}</h2>
 <h3>${product?.priceAfterDiscount}</h3>
 <div className="flex items-center text-[12px]">

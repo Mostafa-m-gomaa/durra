@@ -2,11 +2,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
 body {
   font-family: 'Cairo', sans-serif;
-  width: 100vw;
-  max-width: 100vw;
   overflow-x:hidden ;
   background-color: #010307;
  
@@ -18,7 +19,7 @@ body {
   
   }
   h2 {
-    @apply text-xl lg:text-4xl font-semibold  ;
+    @apply text-2xl lg:text-4xl font-semibold  ;
   
   } 
   h3 {

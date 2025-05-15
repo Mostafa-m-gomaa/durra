@@ -25,7 +25,7 @@ export function CarouselSize({subCatItems}) {
 
             {subCatItems?.map((sub , i) => {
                 return (
-                    <Link to={`subcat/${sub?._id}`} key={i} className="flex flex-col gap-4 bg-[#1A1F23] min-w-[45%] max-w-[45%] lg:max-w-[24%] lg:min-w-[24%] p-2">
+                    <Link to={`/subcat/${sub?._id}`} key={i} className="flex flex-col gap-4 bg-[#1A1F23] min-w-[45%] max-w-[45%] lg:max-w-[24%] lg:min-w-[24%] p-2">
                       <div className="flex">
                         <span className='bg-scndcolor text-[10px]'>NEW</span>
                       </div>
