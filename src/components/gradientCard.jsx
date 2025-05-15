@@ -8,7 +8,7 @@ const GradientCard = ({title ,image  ,link , ...props}) => {
 
     <img src={image} alt="" className='max-h-[220px] min-h-[220px] lg:max-h-[280px] lg:min-h-[280px] max-w-[80%] min-w-[80%] lg:max-w-[60%] lg:min-w-[60%]' />
 {title}
-<Link className='px-4 py-1 border-[1px] w-fit mx-auto text-[12px]' to={link}>Explore Our Collection</Link>
+<Link className='px-4 py-1 border-[1px] w-fit mx-auto text-[9px] lg:text-[12px]' to={link}>Explore Our Collection</Link>
     </div>
 </div>
   )
