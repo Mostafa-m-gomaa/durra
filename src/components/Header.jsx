@@ -6,15 +6,21 @@ import { Link } from 'react-router-dom';
 import burgerIcon from'../../src/assets/menu.png'
 import ExampleMenu from './Example';
 import replaceImg from '../assets/replaceImg.png'
-import { IconRight } from 'react-day-picker';
-import { set } from 'date-fns';
+import {DropdownMenuDemo} from './ChangeLang';
+import { useTranslation } from "react-i18next";
+
 
 
 
 
 const Header = () => {
 
-    const lang = "en"
+          const { t, i18n } = useTranslation();
+                     const [lang,setLang] =useState("")
+                     
+                 useEffect(()=>{
+               setLang(localStorage.getItem("lang"))
+                 },[])
     const [isChecked, setIsChecked] = React.useState(false)
 
 const {data : categories}=useQuery({
@@ -48,7 +54,7 @@ useEffect(() => {
 console.log(catItems)
 
   return (
-    <div className='w-full max-w-[100%] overflow-hidden bg-scndcolor fixed top-0 z-50'>
+    <div className='w-full max-w-[100%]  overflow-hidden lg:overflow-visible bg-scndcolor fixed top-0 z-50'>
 
 <div className="w-full overflow-x-hidden lg:overflow-visible mx-auto flex justify-between items-center py-4 ">
 
@@ -64,11 +70,11 @@ console.log(catItems)
 <div className={` flex gap-4 bg-scndcolor fixed lg:static lg:flex-row flex-col lg:items-center items-start ${isChecked ? "left-0" : "left-[-150%]"}  lg:left-0 lg:top-0 top-[65px] lg:gap-8 gap-4 bg-black lg:bg-transparent w-screen lg:w-fit h-screen lg:h-fit overflow-hidden transition-all duration-500 ease-in-out z-50 lg:overflow-visible`}>
 
 
-{catItems.map((cat, index) => {
+{catItems?.map((cat, index) => {
                             let name
                             if(lang==='en'){
                                 name=cat.name_en}
-                            else if(lang==='ar'){
+                            else if(lang==='turk'){
                                 name=cat.name_ar
                             }
 
@@ -76,11 +82,11 @@ console.log(catItems)
 
                                 return (
                                     <Link to={`cat/${cat._id}`} key={index} onClick={() => {setIsChecked(!isChecked) }}
-                                     className="border-b-2 text-[20px]  lg:text-[18px] px-[35px] border-white lg:border-none group capitalize py-2 w-fit lg:px-2  border-transparent pb-2  transition-all  ">
+                                     className=" border-b-2 text-[20px]  lg:text-[18px] px-[35px] border-white lg:border-none group capitalize py-2 w-fit lg:px-2  border-transparent pb-2  transition-all ">
                                       
                                           {name}
     
-                                        <div className="transition-all   gap-3 absolute hidden w-screen left-0 justify-between overflow-hidden  px-[15px]   lg:group-hover:flex sm:rounded  top-[80%] bg-scndcolor   hover:flex  overflow-y-scroll h-[67vh]">
+                                        <div className="transition-all z-50   gap-3 absolute hidden w-screen left-0 justify-between overflow-hidden  px-[15px]   lg:group-hover:flex sm:rounded  top-[80%] bg-scndcolor   hover:flex  overflow-y-scroll h-[67vh]">
                                             <div className="flex flex-col gap-2 w-[50%] pt-[15px]">
                                             <h2 className='pl-[20px]'>{name}</h2>
                                             {subCatItems.map((sub, index) => {
@@ -91,7 +97,7 @@ console.log(catItems)
                                                     catName = sub?.category?.name_en || "no-cat";
                          
                                                 }
-                                                else if(lang==='ar'){
+                                                else if(lang==='turk'){
                                                     subName=sub.name_ar
                                                     catName = sub?.category?.name_ar || "no-cat";
                                                   
@@ -123,7 +129,7 @@ console.log(catItems)
                               <Link to={`cat/jeweleryCat`} onClick={() => {setIsChecked(!isChecked) }}
                                      className="border-b-2 text-[20px]  lg:text-[18px] px-[35px] border-white lg:border-none group capitalize py-2 w-fit lg:px-2  border-transparent pb-2  transition-all  ">
                                       
-                                          Jewelery
+                                          {t("Jewelery")}
     
                                         <div className="transition-all   gap-3 absolute hidden w-screen left-0 justify-between overflow-hidden  px-[15px]   lg:group-hover:flex sm:rounded  top-[80%] bg-scndcolor   hover:flex  overflow-y-scroll h-[67vh]">
                                             <div className="flex flex-col gap-2 w-[50%] pt-[15px]">
@@ -148,16 +154,23 @@ console.log(catItems)
                                         </div>
     
                                     </Link>
+                                       <Link to={`ourstory`} onClick={() => {setIsChecked(!isChecked) }}
+                                     className="border-b-2 text-[20px]  lg:text-[18px] px-[35px] border-white lg:border-none group capitalize py-2 w-fit lg:px-2  border-transparent pb-2  transition-all  ">
+                                       {t("Our Story")}
+                                     </Link>
+                                       <Link to={`contact`} onClick={() => {setIsChecked(!isChecked) }}
+                                     className="border-b-2 text-[20px]  lg:text-[18px] px-[35px] border-white lg:border-none group capitalize py-2 w-fit lg:px-2  border-transparent pb-2  transition-all  ">
+                                          {t("Contact Us")}
+                                     </Link>
                         
 </div>
     </div>
 
     
 <div className="flex gap-2 lg:gap-8 *:gap-1 *:lg:gap-4 *:text-[11px] *:items-center *:lg:text-[15px] pr-[15px] lg:pr-[35px]">
+  <DropdownMenuDemo />
     {/* <div className="flex"> <span><Search /></span> <span>search</span></div> */}
-    <div className="flex"> <span><Heart /></span> <span>WishList</span></div>
-    <Link to="/cart" className="flex"> <span className='relative'><ShoppingBag/> <div className="absolute bg-red-600 px-1 rounded-md top-[-15px] left-[-10px]">{ordersNum}</div></span> <span>Cart</span></Link>
-    <div className="flex"> <span><User /></span> <span>Account</span></div>
+    <Link to="/cart" className="flex"> <span className='relative'><ShoppingBag/> <div className="absolute bg-red-600 px-1 rounded-md top-[-15px] left-[-10px]">{ordersNum}</div></span> <span>   {t("Cart")}</span></Link>
 </div>
 </div>
 

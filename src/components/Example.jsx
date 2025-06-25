@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 const ExampleMenu = ({ catItems, subCatItems, lang }) => {
+          // const [lang,setLang] =useState("")
+                     
+          //        useEffect(()=>{
+          //      setLang(localStorage.getItem("lang"))
+          //        },[])
   return (
     <div className="relative group">
       {/* Simulated Category (Single Item for Simplicity) */}

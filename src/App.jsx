@@ -12,6 +12,9 @@ import Cart from './pages/Cart';
 import SubCatPage from './pages/SubCat';
 import ProductPage from './pages/ProductPage';
 import JewelPage from './pages/JeweleryPage';
+import OurStory from './pages/OurStory';
+import Contact from './pages/Contact';
+import ScrollToTop from './components/ScrollToTop';
 function App() {
   const history = useNavigate()
 
@@ -21,11 +24,19 @@ function App() {
       duration : 2000
     });
   }, [])
+  useEffect(() => {
+
+    const lang = localStorage.getItem("lang");
+    if (!lang) {
+ localStorage.setItem("lang", "en");    } 
+  
+  }, [])
 
   return (
 <div className="app w-full max-w-[100vw] overflow-x-hidden">
 <Toaster />
 <Header />
+<ScrollToTop />
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/cat/:id" element={<CatPage />} />
@@ -34,6 +45,8 @@ function App() {
     <Route path="/subCat/:id" element={<SubCatPage />} />
     <Route path="/product/:id" element={<ProductPage />} />
     <Route path="/cat/jeweleryCat" element={<JewelPage />} />
+    <Route path="/ourstory" element={<OurStory />} />
+    <Route path="/contact" element={<Contact/>} />
  
   </Routes>
   <Footer />

@@ -8,11 +8,17 @@ import DurraDesign from './DurraDesign'
 import GradientCard from '@/components/gradientCard'
 import HomaPartOne from '@/components/HomaPartOne'
 import HomePartTwo from '@/components/HomaPartTwo'
+import { useEffect, useState } from 'react'
+import { useTranslation } from "react-i18next";
  
 
 const Home = () => {
-
-
+const { t, i18n } = useTranslation();
+       const [lang,setLang] =useState("")
+            
+        useEffect(()=>{
+      setLang(localStorage.getItem("lang"))
+        },[])
 
 const {data : categories}=useQuery({
     queryKey:['categories'],
@@ -33,16 +39,44 @@ const subCatItems = subCats?.data || []
     <div className='flex flex-col gap-16 w-full pt-16'>
         <Hero />
 
-            {catItems?.map((cat ,i)=>
-              cat?.name_en === "Duraa Designs" &&    <DurraDesign categoryId={cat?._id} title={cat.name_en} subs={subCatItems}   />)}
+            {catItems?.map((cat ,i)=>{
+                let name
+                            if(lang==='en'){
+                                name=cat?.name_en}
+                            else if(lang==='turk'){
+                                name=cat.name_ar
+                            }
+return(
+
+  cat?.name_en === "Duraa Designs" &&    <DurraDesign categoryId={cat?._id} title={name} subs={subCatItems}   />)}
+)
+            }
         <UnderHero />
         <div className="flex justify-center gap-1 w-[90%] mx-auto flex-wrap">
 
-        {catItems?.map((cat,i)=> ["Duraa Designs" , "Watches" , "Jewelry"].includes(cat?.name_en) && <GradientCard width="max-w-[45%] min-w-[45%] lg:max-w-[30%] lg:min-w-[30%]" title={cat?.name_en} image={cat?.imageCover} link={`/cat/${cat._id}`} />)}
+        {catItems?.map((cat,i)=> {
+            let name
+                            if(lang==='en'){
+                                name=cat?.name_en}
+                            else if(lang==='turk'){
+                                name=cat.name_ar
+                            }
+          return(
+
+            ["Duraa Designs" , "Watches" , "Jewelry"].includes(cat?.name_en) && <GradientCard width="max-w-[45%] min-w-[45%] lg:max-w-[30%] lg:min-w-[30%]" title={name} image={cat?.imageCover} link={`/cat/${cat._id}`} />
+          )
+        }
+          )}
         </div>
     {catItems?.map((cat ,i)=>{
+        let name
+                            if(lang==='en'){
+                                name=cat?.name_en}
+                            else if(lang==='turk'){
+                                name=cat.name_ar
+                            }
       return(
-         <ShowProducts title={cat?.name_en} linkTitle={`see all products`} categoryId={cat?._id} subs={subCatItems} /> 
+         <ShowProducts title={name} linkTitle={t("see all products")} categoryId={cat?._id} subs={subCatItems} /> 
       )
     })}
  <HomaPartOne />

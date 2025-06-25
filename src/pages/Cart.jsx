@@ -5,6 +5,8 @@ import { useState } from 'react'
 import { Formik } from 'formik'
 import { Button } from '@/components/ui/button'
 import { toast } from 'react-hot-toast'
+import { useTranslation } from "react-i18next";
+
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 const Cart = () => {
@@ -15,7 +17,12 @@ const Cart = () => {
     const [notes,setNotes] = useState('')
     const [image, setImage] = useState(null);
     const[loader,setLoader] = useState(false)
-
+  const { t, i18n } = useTranslation();
+      const [lang,setLang] =useState("")
+      
+  useEffect(()=>{
+setLang(localStorage.getItem("lang"))
+  },[])
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -113,7 +120,8 @@ setCartItems(JSON.parse(localStorage.getItem("orders")) || [])
     <div className='py-32 w-[90%] mx-auto flex flex-col gap-16' >
          <div className="flex flex-col lg:flex-row">
             <div className="w-[90%] lg:w-[50%] flex flex-col gap-12 items-start">
-<h2>Contact Information</h2>
+<h2>{t("Contact Information")} </h2>
+          
 
         <form onSubmit={submitForm}
   className="flex w-[80%]  flex-col rounded-xl bg-clip-border text-gray-700 shadow-md gap-4 " 
@@ -122,7 +130,8 @@ setCartItems(JSON.parse(localStorage.getItem("orders")) || [])
 
     <div className="flex flex-col gap-2">
       <label>
-        Your Name
+        {t("Your Name")}
+        
       </label>
       <input
       onChange={(e)=>setEmail(e.target.value)}
@@ -134,7 +143,8 @@ setCartItems(JSON.parse(localStorage.getItem("orders")) || [])
     </div>
     <div className="flex flex-col gap-2">
       <label>
-        Email
+        {t("Email")}
+        
       </label>
       <input
       required
@@ -147,7 +157,8 @@ setCartItems(JSON.parse(localStorage.getItem("orders")) || [])
     </div>
     <div className="flex flex-col gap-2">
       <label>
-        Phone Number
+        {t("Phone Number")}
+        
       </label>
       <input
      required
@@ -160,7 +171,8 @@ setCartItems(JSON.parse(localStorage.getItem("orders")) || [])
     </div>
     <div className="flex flex-col gap-2">
       <label>
-        Address   
+          {t("Address")}
+          
       </label>
       <input
       required
@@ -173,7 +185,8 @@ setCartItems(JSON.parse(localStorage.getItem("orders")) || [])
     </div>
     <div className="flex flex-col gap-2">
       <label>
-        Notes
+          {t("Notes")}
+        
       </label>
       <input
         onChange={(e)=>setNotes(e.target.value)}
@@ -185,7 +198,8 @@ setCartItems(JSON.parse(localStorage.getItem("orders")) || [])
     </div>
     <div className="flex flex-col gap-2">
       <label>
-        Identity
+        {t("Identity")}
+        
       </label>
       <input
     required
@@ -201,28 +215,36 @@ setCartItems(JSON.parse(localStorage.getItem("orders")) || [])
  
     <div className="flex w-full justify-between">
       <div>
-        Total :
+        {t("Total")} :
+        
       </div>
       ${subTotal}
     </div>
  <Button className="w-full" type="submit" disabled={loader} >
     
 
+      {t("Pay")}
   
-     Pay
+     
      {loader && <RecycleIcon className='animate-spin' />}
  </Button>
 
 </form>
             </div>
             <div className="w-[90%] lg:w-[50%] flex flex-col gap-4 pt-8 lg:pt-0">
-<h2>shopping cart</h2>
+<h2>  {t("shopping cart")}</h2>
 {cartItems?.map((item , i)=>{
+          let name
+                            if(lang==='en'){
+                                name=item.name_en}
+                            else if(lang==='turk'){
+                                name=item.name_ar
+                            }
     return(
         <div key={i} className="flex gap-4 bg-[#1F2A33] p-2">
             <img src={item?.imageCover} alt="" className='max-w-[35%] min-w-[35%] min-h-[220px] max-h-[220px] bg-[#181E1F]'  />
             <div className="flex flex-col gap-8">
-                <h3>{item?.title_en}</h3>
+                <h3>{name}</h3>
                         <button onClick={() => toggleProductInCart(item)} className="text-[12px] bg-scndcolor px-2 py-1 rounded" >   {isProductInCart(item._id) ? "Remove " : "Add"}</button>
                 <span>$ {item?.priceAfterDiscount}</span>
             </div>

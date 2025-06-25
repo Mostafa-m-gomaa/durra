@@ -7,8 +7,17 @@ import catImage from '../assets/catImg.png'
 import ShowProducts from '@/components/ShowProducts'
 import ShowProductsForSubs from '@/components/showProductFoesubs'
 import GradientCard from '@/components/gradientCard'
+import { useTranslation } from "react-i18next";
+
 
 const CatPage = () => {
+
+    const { t, i18n } = useTranslation();
+        const [lang,setLang] =useState("")
+        
+    useEffect(()=>{
+  setLang(localStorage.getItem("lang"))
+    },[])
     const {id} =useParams()
 
     const {data : categoryData , isLoading} = useQuery({
@@ -35,7 +44,7 @@ const CatPage = () => {
         <div className="flex w-full items-center">
 <div className="flex w-[60%] justify-start  flex flex-col text-left gap-8">
 <h1>{catItems?.name_en}</h1>
-<span className='font-thin'>Indulge in the timeless allure of our Jewelry and Diamond Collection at Duraa. Each piece is a masterpiece, meticulously crafted to celebrate elegance, sophistication, and individuality</span>
+<span className='font-thin'>  {t("cat1")}</span>
 </div>
 <img src={catItems?.imageCover || catImage} className='mx-auto max-w-[30%] max-h-[400px]' alt="" />
         </div>
@@ -43,13 +52,31 @@ const CatPage = () => {
 
 
 <div className="flex w-full gap-2 justify-center flex-wrap gap-2">
-{subCatItems?.map((sub,i)=> <GradientCard key={i} title={sub?.name_en} image={sub?.imageCover}  link={`/subCat/${sub?._id}`}/>)}
+{subCatItems?.map((sub,i)=>{
+          let name
+                            if(lang==='en'){
+                                name=sub?.name_en}
+                            else if(lang==='turk'){
+                                name=sub.name_ar
+                            }
+return(
+
+<GradientCard key={i} title={name} image={sub?.imageCover}  link={`/subCat/${sub?._id}`}/>
+)
+} 
+)}
 </div>
 
         <div className="flex gap-32 flex-col w-full ">
 {subCatItems?.map((sub , i) => {
+    let name
+                            if(lang==='en'){
+                                name=sub?.name_en}
+                            else if(lang==='turk'){
+                                name=sub.name_ar
+                            }
     return (
-      <ShowProductsForSubs title={sub?.name_en} products={productsItems}  subCategoryId={sub?._id}  />
+      <ShowProductsForSubs title={name} products={productsItems}  subCategoryId={sub?._id}  />
     )
 
 }

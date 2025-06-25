@@ -2,11 +2,20 @@ import React from 'react'
 import imgOne from '../assets/one.png'
 import imgTwo from '../assets/two.png'
 import imgThree from '../assets/three.png'
+import { useTranslation } from "react-i18next";
+import { useState } from 'react';
+import { useEffect } from 'react';
 const HomaPartTwo = () => {
+           const { t, i18n } = useTranslation();
+                            const [lang,setLang] =useState("")
+                            
+                        useEffect(()=>{
+                      setLang(localStorage.getItem("lang"))
+                        },[])
     const data = [
-        {img : imgOne , title : "Seamless Luxury, Delivered to You Designs" , desc : "Free Worldwide Shipping: Complimentary insured shipping on orders over $500."},
-        {img : imgTwo , title : "Investment in Gold" , desc : "Our gold investment experts will guide you on the best time to buy or sell, helping you maximize your investment and grow or preserve your wealth with confidence."},
-        {img : imgThree , title : "Create a Legacy, Customize Yours" , desc : "Personalized Service, Collaborate with our artisans to design bespoke jewelry."},
+        {img : imgOne , title : t("title4") , desc : t("desc1")},
+        {img : imgTwo , title : t("title5") , desc : t("desc2")},
+        {img : imgThree , title :t("title6")  , desc : t("desc3") },
     ]
   return (
     <div className='w-[90%] relative mx-auto flex '>

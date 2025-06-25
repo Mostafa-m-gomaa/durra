@@ -7,8 +7,16 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { useTranslation } from "react-i18next";
 
 const ProductPage = () => {
+      const { t, i18n } = useTranslation();
+                const [lang,setLang] =useState("")
+                
+            useEffect(()=>{
+          setLang(localStorage.getItem("lang"))
+            },[])
+
     const [product , setProduct] = React.useState(null)
     const [selectedImage,setSelectedImage]=useState("")
     useEffect(()=>{
@@ -63,12 +71,12 @@ return(
 </div>
 
 <div className="w-full bg-[#1A1F23] text-center py-16 px-20 flex flex-col gap-10">
-<h3>The story behind</h3>
-<span className='font-thin text-[12px] '>Traveling Time" is a poetic journey across the globe, tracing time zones and blending continents into a fantastical equestrian world. As latitudes merge and borders dissolve, time becomes fluid, and the compass spins endlessly, symbolizing the freedom to be anywhere, anytime. This imaginative exploration celebrates the boundless possibilities of time and space.</span>
+<h3>{t("The story behind")}</h3>
+<span className='font-thin text-[12px] '> {t("prod1")}</span>
 </div>
 </div>
 <div className="flex w-[95%] lg:w-[30%] flex-col gap-4">
-<h2 className="flex flex-wrap text-left">{product?.title_en}</h2>
+<h2 className="flex flex-wrap text-left">{lang=== "en" ?  product?.title_en :  product?.title_ar}</h2>
 <h3>${product?.priceAfterDiscount}</h3>
 <div className="flex items-center text-[12px]">
     <Star size={20} />
@@ -78,16 +86,20 @@ return(
     <Star size={20} />
     <div>(5.0 stars)</div>
 </div>
-<div className='font-thin'>{product?.description_en}</div>
+<div className='font-thin'>{lang === "en" ?  product?.description_en : product?.description_ar}</div>
                             <Button onClick={() => toggleProductInCart(product)} className="text-[12px] bg-buttoncolor px-2 py-1 rounded" >   {isProductInCart(product?._id) ? "Remove " : "Add To Cart"}</Button>
-<span className='text-center text-[9px]'>Free shipping over $50</span>
+<span className='text-center text-[9px]'>{t("Free shipping over $50")}</span>
    <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="item-1">
-        <AccordionTrigger>Details</AccordionTrigger>
-        <AccordionContent className='flex flex-col gap-2'>
+        <AccordionTrigger>{t("Details")}</AccordionTrigger>
+        {lang === "en" ?    <AccordionContent className='flex flex-col gap-2'>
             {product?.highlights_en.map((item , i) => <span key={i}>{item}</span>)}
           
-        </AccordionContent>
+        </AccordionContent>:    <AccordionContent className='flex flex-col gap-2'>
+            {product?.highlights_ar.map((item , i) => <span key={i}>{item}</span>)}
+          
+        </AccordionContent>}
+     
       </AccordionItem>
     </Accordion>
 
